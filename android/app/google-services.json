@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "265606190931",
+    "project_id": "firestoretodo-c0f71",
+    "storage_bucket": "firestoretodo-c0f71.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:265606190931:android:be6867deb3e8c571b933a6",
+        "android_client_info": {
+          "package_name": "com.github.sakushin_udemy.forestore_todo.firestore_todo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "265606190931-5e9rnqj8ejro3s6kki2aphutu3k7pth6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtOsJlJTQpkYHCkS2F7ll760bEO8djFI0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "265606190931-5e9rnqj8ejro3s6kki2aphutu3k7pth6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

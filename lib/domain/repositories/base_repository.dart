@@ -1,13 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:firestore_todo/domain/database/abstract_table.dart';
 import 'package:firestore_todo/domain/eitities/base_entity.dart';
+import 'package:firestore_todo/domain/value_objects/value_object.dart';
 
 import '../exceptions/data_not_found_failure.dart';
 import '../exceptions/duplicated_data_failure.dart';
 import '../exceptions/failure.dart';
 import '../value_objects/data_key.dart';
 
-abstract class BaseRepository<T extends BaseEntity, S> {
+abstract class BaseRepository<T extends BaseEntity, S extends ValueObject> {
   final AbstractTable<T, S> table;
   BaseRepository(this.table);
 
@@ -41,11 +42,11 @@ abstract class BaseRepository<T extends BaseEntity, S> {
   }
 
   Future<Either<Failure, DataKey>> create(T data) async {
-    var result = await table.read(id: data.id());
+    var result = await table.read(id: data.idValue());
     if (result.isNotEmpty) {
       return Left(
         DuplicatedDataFailure(
-          '該当のデータのIDは、既に登録されています: ${data.id()()}',
+          '該当のデータのIDは、既に登録されています: ${data.idValue()()}',
         ),
       );
     }
@@ -58,14 +59,15 @@ abstract class BaseRepository<T extends BaseEntity, S> {
     return result.fold(
       (failure) => left(failure),
       (data) async {
-        await table.delete(data.id());
+        await table.delete(data.idValue());
         return right(data);
       },
     );
   }
 
   Future<Either<Failure, T>> update(T data) async {
-    var result = await selectOne(data.id());
+    S id = data.idValue as S;
+    var result = await selectOne(id);
 
     return result.fold(
       (failure) => left(failure),

@@ -18,7 +18,7 @@ class User extends BaseEntity<UserId> with _$User {
     @DataKeyConverter() required DataKey userKey,
 
     /// 使用者のID
-    @UserIdConverter() required UserId userId,
+    @UserIdConverter() required UserId id,
 
     /// 使用者の名前
     @UserNameConverter() required UserName userName,
@@ -29,5 +29,18 @@ class User extends BaseEntity<UserId> with _$User {
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   @override
-  UserId id() => userId;
+  UserId get idValue => id;
+
+  @override
+  User setDataKey(DataKey key) {
+    return copyWith(userKey: key);
+  }
+
+  @override
+  User convert(Map<String, Object?> json) {
+    return User.fromJson(json);
+  }
+
+  @override
+  DataKey get dataKey => userKey;
 }

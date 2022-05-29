@@ -33,7 +33,7 @@ class TodoPage extends ConsumerStatefulWidget {
   static String getPath(Todo todo, PageMode pageMode) {
     return path
         .replaceFirst(pathMode, pageMode.path)
-        .replaceAll(pathId, todo.todoId());
+        .replaceAll(pathId, todo.id());
   }
 }
 
@@ -68,7 +68,7 @@ class _TodoPageState extends ConsumerState<TodoPage> {
               loading: () => const CircularProgressIndicator(),
               data: (initData) {
                 WidgetsBinding.instance
-                    ?.addPostFrameCallback((_) => _vm.onTodoLoaded(initData));
+                    .addPostFrameCallback((_) => _vm.onTodoLoaded(initData));
 
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -83,6 +83,7 @@ class _TodoPageState extends ConsumerState<TodoPage> {
                       validator: notEmptyStringValidator,
                       enabled: widget.mode.onlyRegister,
                       onChanged: _vm.onTodoIdChanged,
+                      initialValue: initData.id(),
                     ),
                     TextFormField(
                       decoration: const InputDecoration(

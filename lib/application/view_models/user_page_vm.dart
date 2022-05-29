@@ -20,7 +20,7 @@ class UserPageVm extends MasterPageVm {
 
   final _userProvider = StateProvider<User>((ref) => User(
         userKey: DataKey.empty,
-        userId: UserId(''),
+        id: UserId(''),
         userName: UserName(''),
         emailAddress: EmailAddress(''),
       ));
@@ -54,7 +54,7 @@ class UserPageVm extends MasterPageVm {
 
   void onUserIdChanged(String value) {
     _ref.read(_userProvider.notifier).update((state) => state.copyWith(
-          userId: UserId(value),
+          id: UserId(value),
         ));
   }
 
@@ -78,7 +78,7 @@ class UserPageVm extends MasterPageVm {
     } else if (mode == PageMode.updateMode) {
       result = await database.user().update(user);
     } else if (mode == PageMode.deleteMode) {
-      result = await database.user().delete(user.userId);
+      result = await database.user().delete(user.id);
     }
 
     if (result != null && result.isLeft()) {

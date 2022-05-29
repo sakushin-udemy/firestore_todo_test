@@ -37,10 +37,9 @@ class FirestoreTodoTable extends AbstractTable<Todo, TodoId> {
 
   @override
   Future<List<Todo>> read({TodoId? id}) async {
-    var snapshot = (id != null
-            ? _collection.where('todoId', isEqualTo: id())
-            : _collection)
-        .get();
+    var snapshot =
+        (id != null ? _collection.where('id', isEqualTo: id()) : _collection)
+            .get();
 
     List<QueryDocumentSnapshot> list = (await snapshot).docs;
 

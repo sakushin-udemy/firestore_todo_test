@@ -53,7 +53,6 @@ final _projectListProvider = FutureProvider.autoDispose
 */
 final _todoInitProvider =
     FutureProvider.autoDispose.family<Todo, String?>((ref, id) async {
-  print('initProvider $id');
   var database = GetIt.I.get<Database>();
   Todo result = id != null
       ? (await database.todo().selectOne(TodoId(id)))
@@ -61,7 +60,7 @@ final _todoInitProvider =
       : Todo(
           isDone: TodoIsDone(false),
           deadline: TodoDeadline(DateTime.now()),
-          todoId: TodoId(''),
+          id: TodoId(''),
           title: TodoTitle(''),
           todoKey: DataKey.empty,
         );
@@ -134,7 +133,7 @@ class TodoPageVm extends MasterPageVm {
   void onTodoIdChanged(String value) {
     _ref
         .read(_todoProvider.notifier)
-        .update((state) => state!.copyWith(todoId: TodoId(value)));
+        .update((state) => state!.copyWith(id: TodoId(value)));
   }
 
   void onTitleChanged(String value) {
@@ -161,7 +160,7 @@ class TodoPageVm extends MasterPageVm {
     } else if (mode == PageMode.updateMode) {
       result = await database.todo().update(todo!);
     } else if (mode == PageMode.deleteMode) {
-      result = await database.todo().delete(todo!.todoId);
+      result = await database.todo().delete(todo!.id);
     }
 
     if (result != null && result.isLeft()) {

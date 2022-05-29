@@ -68,7 +68,7 @@ final router = GoRouter(
             ),
             getTitle: (value) => value.title(),
             getSubtitle: (value) =>
-                '${Utilities.dateToString(value.deadline())}まで (id: ${value.todoId()})',
+                '${Utilities.dateToString(value.deadline())}まで (id: ${value.id()})',
           ),
         );
       },

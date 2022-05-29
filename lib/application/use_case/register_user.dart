@@ -26,7 +26,7 @@ class RegisterUser {
       }
 
       UserId userId = UserId(authUser.uid);
-      User user = await registerUser.copyWith(userId: UserId(userId()));
+      User user = await registerUser.copyWith(id: UserId(userId()));
       await database.user().create(user);
 
       return (await database.user().selectOne(userId)).fold(

@@ -14,7 +14,7 @@ part 'todo.freezed.dart';
 class Todo extends BaseEntity<TodoId> with _$Todo {
   const Todo._();
   const factory Todo({
-    @TodoIdConverter() required TodoId todoId,
+    @TodoIdConverter() required TodoId id,
     @DataKeyConverter() required DataKey todoKey,
     @TodoTitleConverter() required TodoTitle title,
     @TodoDeadlineConverter() required TodoDeadline deadline,
@@ -28,5 +28,18 @@ class Todo extends BaseEntity<TodoId> with _$Todo {
   factory Todo.fromJson(Map<String, dynamic> json) => _$TodoFromJson(json);
 
   @override
-  TodoId id() => todoId;
+  TodoId get idValue => id;
+
+  @override
+  Todo setDataKey(DataKey key) {
+    return copyWith(todoKey: key);
+  }
+
+  @override
+  Todo convert(Map<String, Object?> json) {
+    return Todo.fromJson(json);
+  }
+
+  @override
+  DataKey get dataKey => todoKey;
 }

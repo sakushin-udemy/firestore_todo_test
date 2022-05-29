@@ -16,7 +16,7 @@ main() {
 
     final todo1 = Todo(
       todoKey: DataKey.empty,
-      todoId: TodoId('1'),
+      id: TodoId('1'),
       title: TodoTitle('title1'),
       isDone: TodoIsDone(false),
       deadline: TodoDeadline(
@@ -34,7 +34,7 @@ main() {
     expect(resSelectAll2.length, 1);
 
     final todo1_ = resSelectAll2[0];
-    expect(todo1.todoId, todo1_.todoId);
+    expect(todo1.id, todo1_.id);
     expect(todo1.title, todo1_.title);
     expect(todo1.deadline, todo1_.deadline);
     expect(todo1.isDone, todo1_.isDone);
@@ -54,13 +54,13 @@ main() {
     expect(resSelectAll3.length, 1);
 
     final todo2_ = resSelectAll3[0];
-    expect(todo2_.todoId, todo1_.todoId);
+    expect(todo2_.id, todo1_.id);
     expect(todo2_.title(), 'title1_updated');
     expect(todo2_.deadline, todo1_.deadline);
     expect(todo2_.isDone(), true);
 
     // delete
-    await repository.delete(todo2.todoId);
+    await repository.delete(todo2.id);
     final resSelectAll4 = (await repository.read());
     expect(resSelectAll4.length, 0);
   });

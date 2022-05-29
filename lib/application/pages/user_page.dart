@@ -32,7 +32,7 @@ class UserPage extends ConsumerStatefulWidget {
   static String getPath(User user, PageMode pageMode) {
     return path
         .replaceFirst(pathMode, pageMode.path)
-        .replaceAll(pathId, user.userId());
+        .replaceAll(pathId, user.id());
   }
 }
 

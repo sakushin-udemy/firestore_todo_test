@@ -18,7 +18,7 @@ class LoginPageVm {
   final _userProvider = StateProvider<User>(
     (ref) => User(
         userKey: DataKey.empty,
-        userId: UserId(''),
+        id: UserId(''),
         userName: UserName(''),
         emailAddress: EmailAddress('')),
   );
